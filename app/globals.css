@@ -1,26 +1,520 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-lavender: #ece6ff;
+  --color-lavender-deep: #d9cfff;
+  --color-ink: #2e1065;
+  --color-electric: #7c3aed;
+  --color-electric-deep: #5b21b6;
+  --color-sky: #38bdf8;
+  --color-sky-deep: #0284c7;
+  --color-sun: #fde047;
+  --color-sun-deep: #facc15;
+  --color-mint: #6ee7b7;
+  --color-mint-deep: #10b981;
+  --color-candy: #fb7185;
+  --color-candy-deep: #e11d48;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-fredoka), ui-rounded, "Segoe UI", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ------------------------------ dynamic themes ------------------------------ *
+ * Applied via <html data-theme="..."> so every surface (page, card, buttons)
+ * crossfades together when the level phase changes.
+ * -------------------------------------------------------------------------- */
+
+:root,
+[data-theme="playful"] {
+  --ps-bg: #ece6ff;
+  --ps-blob-a: rgba(167, 139, 250, 0.6);
+  --ps-blob-b: rgba(56, 189, 248, 0.4);
+  --ps-blob-c: rgba(253, 224, 71, 0.5);
+  --ps-vignette: transparent;
+  --ps-ink: #2e1065;
+  --ps-ink-soft: rgba(46, 16, 101, 0.75);
+  --ps-ink-faint: rgba(46, 16, 101, 0.55);
+  --ps-accent: #7c3aed;
+  --ps-card-accent: #7c3aed;
+  --ps-accent-deep: #5b21b6;
+  --ps-accent-soft: rgba(124, 58, 237, 0.15);
+  --ps-accent-glow: rgba(124, 58, 237, 0.9);
+  --ps-focus: #38bdf8;
+  --ps-highlight: #fde047;
+  --ps-highlight-deep: #eab308;
+  --ps-highlight-glow: rgba(253, 224, 71, 0.95);
+  --ps-card: rgba(255, 255, 255, 0.75);
+  --ps-card-border: rgba(255, 255, 255, 0.85);
+  --ps-card-hard: rgba(46, 16, 101, 0.14);
+  --ps-card-shadow: rgba(46, 16, 101, 0.55);
+  --ps-card-ink: #2e1065;
+  --ps-card-soft: rgba(46, 16, 101, 0.7);
+  --ps-card-faint: rgba(46, 16, 101, 0.45);
+  --ps-chip-bg: rgba(255, 255, 255, 0.85);
+  --ps-chip-border: rgba(46, 16, 101, 0.1);
+  --ps-chip-shadow: rgba(46, 16, 101, 0.12);
+  --ps-overlay: rgba(236, 230, 255, 0.88);
+  --ps-overlay-strong: rgba(217, 207, 255, 0.94);
+  --ps-track-bg: #ffffff;
+  --ps-track-border: rgba(46, 16, 101, 0.1);
+  --ps-stripe: rgba(46, 16, 101, 0.07);
+  --ps-ghost-shadow: #c4b5fd;
+}
+
+[data-theme="orange"] {
+  --ps-bg: #ffe3cc;
+  --ps-blob-a: rgba(251, 146, 60, 0.55);
+  --ps-blob-b: rgba(253, 230, 138, 0.55);
+  --ps-blob-c: rgba(234, 88, 12, 0.32);
+  --ps-vignette: rgba(154, 52, 18, 0.32);
+  --ps-ink: #431407;
+  --ps-ink-soft: rgba(67, 20, 7, 0.78);
+  --ps-ink-faint: rgba(67, 20, 7, 0.58);
+  --ps-accent: #ea580c;
+  --ps-card-accent: #ea580c;
+  --ps-accent-deep: #9a3412;
+  --ps-accent-soft: rgba(234, 88, 12, 0.15);
+  --ps-accent-glow: rgba(234, 88, 12, 0.85);
+  --ps-focus: #9a3412;
+  --ps-highlight: #fb923c;
+  --ps-highlight-deep: #c2410c;
+  --ps-highlight-glow: rgba(251, 146, 60, 0.95);
+  --ps-card: rgba(255, 251, 245, 0.82);
+  --ps-card-border: rgba(255, 255, 255, 0.88);
+  --ps-card-hard: rgba(124, 45, 18, 0.2);
+  --ps-card-shadow: rgba(124, 45, 18, 0.5);
+  --ps-card-ink: #431407;
+  --ps-card-soft: rgba(67, 20, 7, 0.72);
+  --ps-card-faint: rgba(67, 20, 7, 0.48);
+  --ps-chip-bg: rgba(255, 250, 245, 0.9);
+  --ps-chip-border: rgba(124, 45, 18, 0.14);
+  --ps-chip-shadow: rgba(124, 45, 18, 0.16);
+  --ps-overlay: rgba(255, 237, 213, 0.92);
+  --ps-overlay-strong: rgba(254, 215, 170, 0.95);
+  --ps-track-bg: #fffaf5;
+  --ps-track-border: rgba(124, 45, 18, 0.14);
+  --ps-stripe: rgba(124, 45, 18, 0.08);
+  --ps-ghost-shadow: #fdba74;
+}
+
+[data-theme="red"] {
+  --ps-bg: #7f1d1d;
+  --ps-blob-a: rgba(248, 113, 113, 0.4);
+  --ps-blob-b: rgba(251, 146, 60, 0.38);
+  --ps-blob-c: rgba(255, 241, 242, 0.14);
+  --ps-vignette: rgba(69, 10, 10, 0.62);
+  --ps-ink: #fff1f2;
+  --ps-ink-soft: rgba(255, 241, 242, 0.82);
+  --ps-ink-faint: rgba(255, 241, 242, 0.62);
+  --ps-accent: #f87171;
+  --ps-card-accent: #e11d48;
+  --ps-accent-deep: #9f1239;
+  --ps-accent-soft: rgba(225, 29, 72, 0.14);
+  --ps-accent-glow: rgba(225, 29, 72, 0.85);
+  --ps-focus: #fde047;
+  --ps-highlight: #fb923c;
+  --ps-highlight-deep: #c2410c;
+  --ps-highlight-glow: rgba(251, 146, 60, 0.95);
+  --ps-card: rgba(255, 241, 242, 0.88);
+  --ps-card-border: rgba(255, 255, 255, 0.9);
+  --ps-card-hard: rgba(69, 10, 10, 0.4);
+  --ps-card-shadow: rgba(69, 10, 10, 0.7);
+  --ps-card-ink: #4c0519;
+  --ps-card-soft: rgba(76, 5, 25, 0.72);
+  --ps-card-faint: rgba(76, 5, 25, 0.5);
+  --ps-chip-bg: rgba(255, 247, 247, 0.92);
+  --ps-chip-border: rgba(69, 10, 10, 0.16);
+  --ps-chip-shadow: rgba(69, 10, 10, 0.22);
+  --ps-overlay: rgba(255, 241, 242, 0.94);
+  --ps-overlay-strong: rgba(254, 205, 211, 0.96);
+  --ps-track-bg: #fff7f7;
+  --ps-track-border: rgba(69, 10, 10, 0.18);
+  --ps-stripe: rgba(69, 10, 10, 0.09);
+  --ps-ghost-shadow: #fda4af;
+}
+
+@layer base {
+  body {
+    background-color: var(--ps-bg);
+  }
+
+  /* Theme crossfade: any element that colours itself picks up the new vars.
+   * Component-level Tailwind transitions (transition-all etc.) still win. */
+  body,
+  body * {
+    transition:
+      background-color 700ms ease,
+      color 700ms ease,
+      border-color 700ms ease,
+      box-shadow 700ms ease;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-fredoka), ui-rounded, "Segoe UI", system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ps-focus, #38bdf8);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------- keyframes --------------------------------- */
+
+@keyframes ps-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-22px) rotate(8deg);
+  }
+}
+
+@keyframes ps-pop {
+  0% {
+    transform: scale(0.55);
+    opacity: 0;
+  }
+  65% {
+    transform: scale(1.07);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ps-rise {
+  0% {
+    transform: translateY(14px) scale(0.85);
+    opacity: 0;
+  }
+  25% {
+    transform: translateY(0) scale(1.06);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(-8px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-26px) scale(0.96);
+    opacity: 0;
+  }
+}
+
+@keyframes ps-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-9px) rotate(-0.6deg);
+  }
+  40% {
+    transform: translateX(8px) rotate(0.6deg);
+  }
+  60% {
+    transform: translateX(-6px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes ps-zone {
+  0% {
+    transform: scaleX(0.35);
+    opacity: 0;
+  }
+  70% {
+    transform: scaleX(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ps-bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.32) rotate(-3deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes ps-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes ps-wiggle {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes ps-announce {
+  0% {
+    transform: scale(0.5) translateY(20px);
+    opacity: 0;
+  }
+  35% {
+    transform: scale(1.07) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  82% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.04);
+    opacity: 0;
+  }
+}
+
+@keyframes ps-flash {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes ps-danger {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* -------------------------------- utilities ---------------------------------- */
+
+.animate-ps-float {
+  animation: ps-float 8s ease-in-out infinite;
+}
+
+.animate-ps-pop {
+  animation: ps-pop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+
+.animate-ps-rise {
+  animation: ps-rise 0.85s ease-out both;
+}
+
+.animate-ps-shake {
+  animation: ps-shake 0.4s ease-in-out;
+}
+
+.animate-ps-zone {
+  animation: ps-zone 0.32s cubic-bezier(0.2, 1.5, 0.4, 1) both;
+}
+
+.animate-ps-bump {
+  animation: ps-bump 0.35s ease-out;
+}
+
+.animate-ps-blink {
+  animation: ps-blink 1.4s ease-in-out infinite;
+}
+
+.animate-ps-wiggle {
+  animation: ps-wiggle 2.4s ease-in-out infinite;
+}
+
+.animate-ps-announce {
+  animation: ps-announce 2.2s cubic-bezier(0.2, 1.2, 0.4, 1) both;
+}
+
+.animate-ps-flash {
+  animation: ps-flash 0.9s ease-out both;
+}
+
+.ps-track-stripes {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--ps-stripe) 0 3px,
+    transparent 3px 26px
+  );
+}
+
+/* Warm edge glow while an emergency theme is active. */
+.ps-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 52%,
+    var(--ps-vignette) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+html[data-theme="orange"] .ps-vignette {
+  opacity: 1;
+  animation: ps-danger 4.5s ease-in-out infinite;
+}
+
+html[data-theme="red"] .ps-vignette {
+  opacity: 1;
+  animation: ps-danger 2.6s ease-in-out infinite;
+}
+
+/* --------------------------------- buttons ----------------------------------- */
+
+.ps-btn {
+  @apply inline-flex select-none items-center justify-center gap-2 rounded-full px-8 py-4 text-lg font-semibold tracking-wide transition-all duration-150;
+}
+
+.ps-btn-primary {
+  background-color: var(--ps-card-accent);
+  color: #fff;
+  box-shadow: 0 6px 0 var(--ps-accent-deep);
+}
+.ps-btn-primary:hover {
+  filter: brightness(1.07);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--ps-accent-deep);
+}
+.ps-btn-primary:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--ps-accent-deep);
+}
+
+.ps-btn-mint {
+  @apply bg-mint-deep text-white shadow-[0_6px_0_#047857];
+}
+.ps-btn-mint:hover {
+  filter: brightness(1.07);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #047857;
+}
+.ps-btn-mint:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #047857;
+}
+
+.ps-btn-sun {
+  background-color: var(--ps-highlight);
+  color: var(--ps-card-ink);
+  box-shadow: 0 6px 0 var(--ps-highlight-deep);
+}
+.ps-btn-sun:hover {
+  filter: brightness(1.04);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--ps-highlight-deep);
+}
+.ps-btn-sun:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--ps-highlight-deep);
+}
+
+.ps-btn-ghost {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: var(--ps-card-ink);
+  box-shadow: 0 5px 0 var(--ps-ghost-shadow);
+  backdrop-filter: blur(8px);
+}
+.ps-btn-ghost:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 var(--ps-ghost-shadow);
+}
+.ps-btn-ghost:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--ps-ghost-shadow);
+}
+
+.ps-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 2px solid var(--ps-chip-border);
+  background-color: var(--ps-chip-bg);
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 0 var(--ps-chip-shadow);
+  backdrop-filter: blur(8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Keep the level announcement readable when animations are suppressed. */
+  .ps-announcement {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* --------------------------- mobile layout (≤639px) ---------------------------
+ * Narrow screens need a taller controls band so the home / game-over panels
+ * fit inside the playfield without spilling over the HUD, plus a tighter
+ * panel rhythm and a full-size Continue tap target. Desktop (≥640px) untouched. */
+
+@media (max-width: 639px) {
+  .ps-controls {
+    height: 176px;
+  }
+
+  .ps-panel {
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .ps-panel h2 {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .ps-panel .ps-chip {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+    font-size: 10px !important;
+  }
+
+  .ps-panel .ps-btn {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .ps-continue {
+    min-height: 44px;
+    padding: 0.75rem !important;
+    font-size: 0.875rem !important;
+  }
 }
