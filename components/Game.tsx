@@ -19,10 +19,12 @@ import { sfx } from "@/lib/sound";
 import { music } from "@/lib/music";
 import {
   isLocalDev,
+  isPlatformMuted,
   pokiBoot,
   pokiGameplayStart,
   pokiGameplayStop,
   showRewardedAd,
+  subscribePlatformMute,
 } from "@/lib/ads";
 
 type Screen = "home" | "playing" | "over";
@@ -134,6 +136,19 @@ export default function Game() {
       setRound(opening);
     });
     return () => cancelAnimationFrame(id);
+  }, []);
+
+  // Platform-driven mute (e.g. CrazyGames settings.muteAudio) always wins
+  // over the in-game toggle; re-apply whenever either side changes.
+  useEffect(() => {
+    const apply = () => {
+      const effective = readMuted() || isPlatformMuted();
+      sfx.muted = effective;
+      music.setMuted(effective);
+      setMuted(effective);
+    };
+    apply();
+    return subscribePlatformMute(apply);
   }, []);
 
   // Keep the document theme in sync with the current level phase. Deferred
@@ -474,12 +489,13 @@ export default function Game() {
   }, [setPhase]);
 
   const toggleMute = useCallback(() => {
-    const next = !sfx.muted;
-    sfx.muted = next;
-    music.setMuted(next);
-    setMuted(next);
+    const next = !readMuted();
     writeMuted(next);
-    if (!next) sfx.play("click");
+    const effective = next || isPlatformMuted();
+    sfx.muted = effective;
+    music.setMuted(effective);
+    setMuted(effective);
+    if (!effective) sfx.play("click");
   }, []);
 
   const handleTrackPointer = useCallback(

@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Fredoka } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -27,13 +26,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full">
         {children}
-        {/* Official Poki HTML5 SDK — required for rewardedBreak() and the
-            Poki Inspector event log. Loaded before hydration; the game
-            degrades gracefully when it is absent (local dev, offline). */}
-        <Script
-          src="https://game-cdn.poki.com/scripts/v2/poki-sdk.js"
-          strategy="beforeInteractive"
-        />
+        {/* Platform ad SDKs (Poki, CrazyGames, …) are loaded dynamically by
+            lib/platform so only the detected hosting platform's SDK is
+            fetched and initialized — never more than one per session. The
+            game degrades gracefully when a script is absent (local dev,
+            offline, unsupported portal). */}
       </body>
     </html>
   );
