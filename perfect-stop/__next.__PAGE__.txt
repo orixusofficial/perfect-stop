@@ -1,0 +1,24 @@
+1:"$Sreact.fragment"
+2:"./_next/static/chunks/3qfy96eoyh-ek.js"
+3:I[39756,["$2"],"default"]
+4:I[37457,["$2"],"default"]
+8:"./_next/static/chunks/39_j7555gwywv.js"
+9:I[28175,["$2","$8"],"default"]
+a:I[97367,["$2"],"OutletBoundary"]
+b:"$Sreact.suspense"
+e:"ViewportBoundary"
+f:I[97367,["$2"],"$e"]
+10:"MetadataBoundary"
+11:I[97367,["$2"],"$10"]
+:HL["./_next/static/chunks/3_7xhy1deflnl.css","style"]
+6:X
+7:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","div",null,{"className":"relative flex min-h-dvh flex-col overflow-hidden bg-[var(--ps-bg)] font-sans text-[var(--ps-ink)]","children":[["$","div",null,{"aria-hidden":true,"className":"pointer-events-none absolute -top-32 -left-24 h-80 w-80 rounded-full bg-[var(--ps-blob-a)] blur-3xl animate-ps-float"}],["$","div",null,{"aria-hidden":true,"className":"pointer-events-none absolute top-1/3 -right-28 h-96 w-96 rounded-full bg-[var(--ps-blob-b)] blur-3xl animate-ps-float [animation-delay:1.6s]"}],["$","div",null,{"aria-hidden":true,"className":"pointer-events-none absolute -bottom-36 left-1/4 h-72 w-72 rounded-full bg-[var(--ps-blob-c)] blur-3xl animate-ps-float [animation-delay:3.1s]"}],["$","div",null,{"aria-hidden":true,"className":"ps-vignette pointer-events-none fixed inset-0 z-0"}],["$","header",null,{"className":"relative z-10 mx-auto flex w-full max-w-4xl items-center justify-between px-5 pt-6 sm:px-8","children":[["$","span",null,{"className":"ps-chip","children":"🎯 Reflex Arcade"}],["$","span",null,{"className":"hidden text-sm font-medium text-[var(--ps-ink-soft)] sm:block","children":"tap · click · space to stop"}]]}],["$","main",null,{"className":"relative z-10 mx-auto flex w-full max-w-4xl flex-1 flex-col items-center px-4 pt-6 pb-10 sm:px-8 sm:pt-10","children":[["$","div",null,{"className":"mb-6 text-center sm:mb-8","children":["$","h1",null,{"className":"animate-ps-pop text-4xl leading-none font-bold tracking-tight text-[var(--ps-ink)] sm:text-6xl","children":["Perfect ",["$","span",null,{"className":"text-[var(--ps-accent)]","children":"Stop"}]]}]}],["$","$L9",null,{}]]}]]}],[["$","script","script-0",{"src":"./_next/static/chunks/39_j7555gwywv.js","async":true}]],["$","$La",null,{"children":["$","$b",null,{"name":"Next.MetadataOutlet","children":"$@c"}]}]]}],"p":"$@d","v":null,"s":"$6"}}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"./_next/static/chunks/3_7xhy1deflnl.css","precedence":"next"}],["$","script","script-0",{"src":"./_next/static/chunks/3qfy96eoyh-ek.js","async":true}]],["$","html",null,{"lang":"en","data-theme":"playful","className":"gSJHjG_variable h-full antialiased","children":["$","body",null,{"className":"min-h-full","children":["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L4",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]}]}]]}],"p":"$@5","v":null,"s":"$6"},"c":"$Q7"},"h":{"r":["$","$1","h",{"children":[null,["$","$Lf",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#ece6ff"}]]}],["$","$L11",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$b",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Perfect Stop — Reflex Arcade Game"}],["$","meta","1",{"name":"description","content":"Stop the bouncing indicator inside the zone. One wrong move and the run is over. How high can you go?"}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@12","v":null,"s":"$6"}},"a":"$@13","u":"$@14","b":"GlFdqM5IV_aIzVbWfqDyO"}
+c:null
+6:300
+14:true
+6:C
+13:0
+5:"$undefined"
+12:"$undefined"
+d:"$undefined"

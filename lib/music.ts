@@ -15,9 +15,12 @@ type Voice = {
   volume: number;
 };
 
+// Relative paths resolve against the document URL so the same build works
+// at a domain root (Vercel) and inside portal iframes (CrazyGames), where a
+// leading slash would escape the game's own folder.
 const TRACK_SRC: Record<TrackId, string> = {
-  base: "/audio/music1-15.mp3",
-  intense: "/audio/music16-plus.mp3",
+  base: "./audio/music1-15.mp3",
+  intense: "./audio/music16-plus.mp3",
 };
 
 /** Background music sits at ~22% so it stays atmospheric (spec: 20–25%). */

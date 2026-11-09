@@ -11,6 +11,8 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    // Static CrazyGames export mirror (compiled output, never source):
+    "perfect-stop-html5/**",
     "next-env.d.ts",
   ]),
 ]);

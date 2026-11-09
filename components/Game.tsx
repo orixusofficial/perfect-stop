@@ -27,7 +27,7 @@ import {
   subscribePlatformMute,
 } from "@/lib/ads";
 
-type Screen = "home" | "playing" | "over";
+type Screen = "home" | "playing" | "over" | "skins";
 
 type Feedback = {
   id: number;
@@ -39,17 +39,10 @@ type Feedback = {
 const INITIAL_ROUND: Round = { zoneStart: 36, zoneWidth: 26 };
 
 const FEEDBACK_STYLE: Record<Verdict["kind"], string> = {
-  perfect: "border-sun-deep bg-sun text-[var(--ps-card-ink)]",
-  great: "border-mint-deep bg-mint-deep text-white",
-  good: "border-sky-deep bg-sky-deep text-white",
-  miss: "border-candy-deep bg-candy-deep text-white",
-};
-
-const BURST_COLORS: Record<Verdict["kind"], string[]> = {
-  perfect: ["#fde047", "#6ee7b7", "#ffffff", "#38bdf8"],
-  great: ["#6ee7b7", "#38bdf8", "#ffffff"],
-  good: ["#38bdf8", "#7c3aed", "#ffffff"],
-  miss: ["#fb7185", "#ffffff", "#d9cfff"],
+  perfect: "border-[var(--ps-fb-perfect-deep)] bg-[var(--ps-fb-perfect)] text-[var(--ps-card-ink)] shadow-[0_0_20px_rgba(253,224,71,0.6)]",
+  great: "border-mint-deep bg-mint-deep text-white shadow-[0_0_20px_rgba(16,185,129,0.6)]",
+  good: "border-sky-deep bg-sky-deep text-white shadow-[0_0_20px_rgba(56,189,248,0.6)]",
+  miss: "border-candy-deep bg-candy-deep text-white shadow-[0_0_20px_rgba(251,113,133,0.6)]",
 };
 
 const HIT_LOCK_MS = 280;
@@ -88,7 +81,35 @@ export default function Game() {
   const [announce, setAnnounce] = useState<Announcement | null>(null);
   const [newBest, setNewBest] = useState(false);
   const [adBusy, setAdBusy] = useState(false);
-  const [adNote, setAdNote] = useState<string | null>(null);
+    const [adNote, setAdNote] = useState<string | null>(null);
+    const [selectedSkin, setSelectedSkin] = useState("pointer-1");
+    const [htmlText, setHtmlText] = useState<Record<string, string>>({});
+    useEffect(() => {
+      if (typeof window === "undefined") return;
+      const saved = localStorage.getItem("ps-pointer-skin");
+      if (saved) setSelectedSkin(saved);
+    }, []);
+    // pointer-2/3/4 are HTML documents, not SVG images, so they cannot be
+    // rendered with  (Next serves .svg as image/svg+xml). Fetch their text
+    // once and render them in an isolated iframe via srcDoc.
+    useEffect(() => {
+      let cancelled = false;
+      Promise.all(
+        ["pointer-2", "pointer-3", "pointer-4"].map(async (id) => {
+          try {
+            const res = await fetch(`./pointers/${id}.svg`);
+            return [id, await res.text()] as [string, string];
+          } catch {
+            return [id, ""] as [string, string];
+          }
+        }),
+      ).then((entries) => {
+        if (!cancelled) setHtmlText(Object.fromEntries(entries));
+      });
+      return () => {
+        cancelled = true;
+      };
+    }, []);
 
   const cardRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -269,7 +290,7 @@ export default function Game() {
   }, []);
 
   const burstAtIndicator = useCallback(
-    (colors: string[], options?: { count?: number; power?: number }) => {
+    (kind: Verdict["kind"], options?: { count?: number; power?: number }) => {
       const card = cardRef.current;
       const track = trackRef.current;
       if (!card || !track) return;
@@ -280,7 +301,7 @@ export default function Game() {
         trackBox.left - cardBox.left + (trackBox.width * simRef.current.pos) / 100;
       const y = trackBox.top - cardBox.top + trackBox.height / 2;
 
-      particlesRef.current?.burst(x, y, { colors, ...options });
+      particlesRef.current?.burstByKind(x, y, kind, options);
     },
     [],
   );
@@ -323,7 +344,7 @@ export default function Game() {
     const verdict = judge(sim.pos, roundRef.current);
 
     if (!verdict.hit) {
-      burstAtIndicator(BURST_COLORS.miss, { count: 30, power: 300 });
+      burstAtIndicator("miss", { count: 30, power: 300 });
       sfx.play("miss");
       shakeCard();
       endRun();
@@ -348,12 +369,11 @@ export default function Game() {
       pos: Math.min(88, Math.max(12, sim.pos)),
     });
 
-    burstAtIndicator(
-      BURST_COLORS[verdict.kind],
-      verdict.kind === "perfect"
+    burstAtIndicator(verdict.kind, {
+      ...(verdict.kind === "perfect"
         ? { count: 44, power: 430 }
-        : { count: 26, power: 330 },
-    );
+        : { count: 26, power: 330 }),
+    });
     sfx.play(verdict.kind === "perfect" ? "perfect" : "hit", scoreRef.current);
 
     const next = nextRound(nextLevel, sim.pos);
@@ -536,7 +556,14 @@ export default function Game() {
       >
         <ParticleLayer ref={particlesRef} />
 
-        <div className="relative z-10 flex flex-col gap-4 sm:gap-5">
+        {/* background environment blobs behind the playfield */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <div className="ps-bg-blob a" />
+          <div className="ps-bg-blob b" />
+          <div className="ps-bg-blob c" />
+        </div>
+
+        <div className={`relative z-10 flex flex-col gap-4 sm:gap-5 ${screen === "skins" ? "invisible pointer-events-none" : ""}`}>
           {/* HUD */}
           <div className="flex items-center justify-between gap-3">
             <div className="ps-chip">
@@ -579,10 +606,12 @@ export default function Game() {
                 <div
                   ref={trackRef}
                   onPointerDown={handleTrackPointer}
-                  className="ps-track-stripes relative h-24 w-full cursor-pointer touch-none select-none overflow-hidden rounded-[24px] border-4 border-[var(--ps-track-border)] bg-[var(--ps-track-bg)] shadow-[inset_0_5px_0_var(--ps-chip-shadow)] sm:h-28"
+                  className="relative h-24 w-full cursor-pointer touch-none select-none overflow-hidden rounded-[24px] border-4 border-[var(--ps-track-border)] bg-[var(--ps-track-bg)] shadow-[inset_0_5px_0_var(--ps-chip-shadow)] sm:h-28"
                 >
+                  {/* track rails — subtle parallel lines that sell speed */}
+                  <div className="ps-track-stripes absolute inset-0 rounded-[20px] opacity-50 pointer-events-none" />
                   {/* current level — compact pill so the HUD stays one row */}
-                  {screen !== "home" && (
+                  {screen === "playing" && (
                     <div className="absolute bottom-1.5 left-2 z-40 rounded-full border border-[var(--ps-chip-border)] bg-[var(--ps-chip-bg)] px-2 py-0.5 text-[10px] font-bold tracking-[0.12em] text-[var(--ps-card-soft)] uppercase backdrop-blur">
                       Lv {level}
                     </div>
@@ -594,10 +623,10 @@ export default function Game() {
                       left: `${round.zoneStart}%`,
                       width: `${round.zoneWidth}%`,
                     }}
-                    className="animate-ps-zone absolute inset-y-1.5 origin-center rounded-[14px] border-2 border-mint-deep/60 bg-mint/55 shadow-[0_0_26px_rgba(16,185,129,0.5)]"
+                    className="animate-ps-zone absolute inset-y-1.5 origin-center rounded-[16px] border-2 border-[var(--ps-accent)]/70 bg-[var(--ps-accent)]/40 shadow-[0_0_26px_rgba(124,58,237,0.45)]"
                   >
-                    <div className="absolute inset-0 rounded-[12px] border-2 border-dashed border-white/75" />
-                    <div className="absolute left-1/2 top-0 h-full w-[3px] -translate-x-1/2 rounded-full bg-mint-deep/70" />
+                    <div className="absolute inset-0 rounded-[14px] border-2 border-dashed border-white/80" />
+                    <div className="absolute left-1/2 top-0 h-full w-[3px] -translate-x-1/2 rounded-full bg-[var(--ps-accent)]/80" />
                   </div>
 
                   {/* moving indicator */}
@@ -605,9 +634,8 @@ export default function Game() {
                     ref={indicatorRef}
                     className="absolute inset-y-0 left-0 w-0"
                   >
-                    <div className="absolute inset-y-2 left-0 w-2 -translate-x-1/2 rounded-full bg-[var(--ps-card-accent)] shadow-[0_0_16px_var(--ps-accent-glow)]" />
-                    <div className="absolute left-0 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[3px] border-white bg-[var(--ps-highlight)] shadow-[0_4px_0_var(--ps-highlight-deep),0_0_20px_var(--ps-highlight-glow)]">
-                      <span className="h-2.5 w-2.5 rounded-full bg-[var(--ps-card-accent)]" />
+                    <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                      <PointerArt id={selectedSkin} box={84} htmlText={htmlText} />
                     </div>
                   </div>
 
@@ -616,11 +644,11 @@ export default function Game() {
                     <div
                       key={feedback.id}
                       style={{ left: `clamp(15%, ${feedback.pos}%, 85%)` }}
-                      className={`animate-ps-rise absolute top-2 z-40 -translate-x-1/2 whitespace-nowrap rounded-full border-2 px-3 py-1 text-[11px] font-bold uppercase tracking-wider shadow-md ${FEEDBACK_STYLE[feedback.kind]}`}
+                      className={`absolute top-2 z-40 -translate-x-1/2 whitespace-nowrap rounded-full border-2 px-3 py-1 text-[11px] font-bold uppercase tracking-wider shadow-lg ${FEEDBACK_STYLE[feedback.kind]} animate-ps-fb-${feedback.kind}`}
                     >
                       {feedback.label}
                       {POINTS[feedback.kind] > 0 && (
-                        <span className="ml-1 opacity-80">
+                        <span className="ml-1 opacity-90">
                           +{POINTS[feedback.kind]}
                         </span>
                       )}
@@ -654,7 +682,7 @@ export default function Game() {
 
             {/* home screen */}
             {screen === "home" && (
-              <div className="ps-panel animate-ps-pop absolute inset-0 z-20 flex flex-col items-center justify-center gap-4 rounded-[26px] border-2 border-[var(--ps-card-border)] bg-[var(--ps-overlay)] px-5 py-6 text-center">
+              <div className="ps-panel animate-ps-pop absolute inset-0 z-20 flex flex-col items-center justify-center gap-4">
                 <span className="rounded-full bg-[var(--ps-accent-soft)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--ps-card-accent)]">
                   Reflex arcade
                 </span>
@@ -672,13 +700,22 @@ export default function Game() {
                     <Dot className="bg-sun-deep" /> Faster every round
                   </li>
                 </ul>
-                <button
-                  type="button"
-                  onClick={startRun}
-                  className="ps-btn ps-btn-primary"
-                >
-                  <PlayIcon /> Play
-                </button>
+                <div className="flex items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setScreen("skins")}
+                    className="ps-btn ps-btn-ghost"
+                  >
+                    Skins
+                  </button>
+                  <button
+                    type="button"
+                    onClick={startRun}
+                    className="ps-btn ps-btn-primary"
+                  >
+                    <PlayIcon /> Play
+                  </button>
+                </div>
                 <p className="text-xs font-medium text-[var(--ps-card-faint)]">
                   One miss ends the run — beat your best!
                 </p>
@@ -687,7 +724,7 @@ export default function Game() {
 
             {/* game over screen */}
             {screen === "over" && (
-              <div className="ps-panel animate-ps-pop absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 rounded-[26px] border-2 border-[var(--ps-card-border)] bg-[var(--ps-overlay-strong)] px-5 py-5 text-center">
+              <div className="ps-panel animate-ps-pop absolute inset-0 z-20 flex flex-col items-center justify-center gap-3">
                 <h2 className="text-2xl font-bold text-[var(--ps-card-ink)] sm:text-3xl">
                   {newBest ? "New personal best!" : "Run over"}
                 </h2>
@@ -786,8 +823,113 @@ export default function Game() {
             )}
           </div>
         </div>
+
+        {/* skins screen */}
+        {screen === "skins" && (
+          <div className="ps-panel-skins animate-ps-pop">
+            <div className="ps-skins-header">
+              <button
+                type="button"
+                onClick={() => setScreen("home")}
+                className="ps-skins-back"
+              >
+                <span aria-hidden="true">←</span> Back
+              </button>
+              <h2 className="ps-skins-heading">Skins</h2>
+            </div>
+            <div className="ps-skins-body">
+              <div className="ps-skins-grid">
+                {["pointer-1", "pointer-2", "pointer-3", "pointer-4", "pointer-5", "pointer-6", "pointer-7", "pointer-8"].map(
+                  (id) => (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedSkin(id);
+                        localStorage.setItem("ps-pointer-skin", id);
+                      }}
+                      className={`ps-skins-card ${selectedSkin === id ? "is-active" : ""}`}
+                    >
+                      <div className="ps-skins-preview">
+                        <PointerArt id={id} box={44} htmlText={htmlText} />
+                      </div>
+                      <span className="ps-skins-label">Skin {id.slice(-1)}</span>
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
+  );
+}
+
+/* ------------------------------ pointer skins ----------------------------- */
+
+// Three of the supplied assets (pointer-2/3/4) are complete HTML documents,
+// not SVG images, so they cannot render inside an <img>. Those are shown in a
+// scaled, isolated <iframe>; the rest are drawn with a plain <img>.
+const HTML_POINTERS = new Set(["pointer-2", "pointer-3", "pointer-4"]);
+
+// Intrinsic design size of each asset, used to scale it into a fixed box
+// while preserving aspect ratio.
+const POINTER_NATIVE: Record<string, [number, number]> = {
+  "pointer-1": [35, 96],
+  "pointer-2": [120, 120],
+  "pointer-3": [120, 120],
+  "pointer-4": [120, 120],
+  "pointer-5": [120, 120],
+  "pointer-6": [120, 120],
+  "pointer-7": [120, 120],
+  "pointer-8": [120, 120],
+};
+
+function PointerArt({ id, box, htmlText }: { id: string; box: number; htmlText: Record<string, string> }) {
+  const [nw, nh] = POINTER_NATIVE[id] ?? [120, 120];
+  const src = `./pointers/${id}.svg`;
+  const html = htmlText[id];
+
+  if (HTML_POINTERS.has(id) && html) {
+    const scale = Math.min(box / nw, box / nh);
+    return (
+      <div
+        style={{ width: box, height: box }}
+        className="pointer-events-none flex items-center justify-center overflow-hidden"
+      >
+        <iframe
+          srcDoc={html}
+          title={`Pointer ${id.slice(-1)}`}
+          scrolling="no"
+          tabIndex={-1}
+          aria-hidden
+          className="border-0 bg-transparent"
+          style={{
+            width: nw,
+            height: nh,
+            flex: "none",
+            transform: `scale(${scale})`,
+            pointerEvents: "none",
+          }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      style={{ width: box, height: box }}
+      className="pointer-events-none flex items-center justify-center overflow-hidden"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt=""
+        draggable={false}
+        style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
+      />
+    </div>
   );
 }
 

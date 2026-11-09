@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sprinkle Bubble Slider - 120x120</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            height: 120px;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Slim Vertical Bubble Track */
+        .bubble-track {
+            position: absolute;
+            width: 32px;
+            height: 116px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1;
+        }
+
+        /* Small Iridescent Bubbles */
+        .b-sm {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.95) 0%, rgba(220, 235, 255, 0.6) 35%, rgba(210, 190, 255, 0.4) 70%, rgba(160, 210, 255, 0.8) 100%);
+            box-shadow: inset -1px -1px 3px rgba(255, 255, 255, 0.9),
+                        inset 1px 1px 2px rgba(150, 180, 255, 0.4),
+                        0 2px 4px rgba(100, 120, 200, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* Top Bubble Trail */
+        .b1 { width: 7px; height: 7px; top: 2px; left: 10px; }
+        .b2 { width: 11px; height: 11px; top: 0px; left: 18px; }
+        .b3 { width: 9px; height: 9px; top: 13px; left: 11px; }
+        .b4 { width: 10px; height: 10px; top: 22px; left: 19px; }
+        .b5 { width: 14px; height: 14px; top: 28px; left: 8px; }
+        .b6 { width: 6px; height: 6px; top: 35px; left: 23px; }
+
+        /* Bottom Bubble Trail */
+        .b7 { width: 7px; height: 7px; bottom: 33px; right: 8px; }
+        .b8 { width: 10px; height: 10px; bottom: 25px; left: 9px; }
+        .b9 { width: 8px; height: 8px; bottom: 15px; right: 10px; }
+        .b10 { width: 13px; height: 13px; bottom: 2px; left: 10px; }
+
+        /* Central Sprinkle Bubble Knob */
+        .bubble-knob {
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(240, 230, 255, 0.65) 30%, 
+                rgba(200, 225, 255, 0.5) 65%, 
+                rgba(175, 205, 255, 0.85) 100%);
+            box-shadow: 0 4px 10px rgba(140, 150, 210, 0.3),
+                        inset -2px -3px 6px rgba(255, 255, 255, 0.95),
+                        inset 2px 2px 5px rgba(140, 160, 240, 0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .bubble-knob:hover {
+            transform: scale(1.08);
+        }
+
+        /* Inner Colorful Sprinkles */
+        .sprinkles-container {
+            position: relative;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+        }
+
+        .sprinkle {
+            position: absolute;
+            width: 7px;
+            height: 3px;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .s-pink1 { background: #ff7ebb; top: 6px; left: 4px; transform: rotate(-25deg); }
+        .s-pink2 { background: #ff6dae; bottom: 5px; left: 10px; transform: rotate(40deg); }
+        .s-yellow1 { background: #ffd43f; top: 4px; right: 5px; transform: rotate(15deg); }
+        .s-yellow2 { background: #ffdb58; bottom: 9px; left: 4px; transform: rotate(-60deg); }
+        .s-blue1 { background: #4cd3eb; top: 13px; left: 2px; transform: rotate(60deg); }
+        .s-blue2 { background: #3bb3e8; top: 12px; right: 3px; transform: rotate(-10deg); }
+        .s-purple { background: #be7dff; bottom: 4px; right: 6px; transform: rotate(30deg); }
+
+        /* Bubble Highlights */
+        .shine-main {
+            position: absolute;
+            top: 4px;
+            left: 7px;
+            width: 12px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+        }
+
+        .shine-sec {
+            position: absolute;
+            bottom: 5px;
+            right: 7px;
+            width: 6px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <!-- Vertical Trail of Bubbles -->
+        <div class="bubble-track">
+            <div class="b-sm b1"></div>
+            <div class="b-sm b2"></div>
+            <div class="b-sm b3"></div>
+            <div class="b-sm b4"></div>
+            <div class="b-sm b5"></div>
+            <div class="b-sm b6"></div>
+            <div class="b-sm b7"></div>
+            <div class="b-sm b8"></div>
+            <div class="b-sm b9"></div>
+            <div class="b-sm b10"></div>
+        </div>
+
+        <!-- Central Sprinkle Bubble Knob -->
+        <div class="bubble-knob">
+            <div class="shine-main"></div>
+            <div class="sprinkles-container">
+                <div class="sprinkle s-pink1"></div>
+                <div class="sprinkle s-pink2"></div>
+                <div class="sprinkle s-yellow1"></div>
+                <div class="sprinkle s-yellow2"></div>
+                <div class="sprinkle s-blue1"></div>
+                <div class="sprinkle s-blue2"></div>
+                <div class="sprinkle s-purple"></div>
+            </div>
+            <div class="shine-sec"></div>
+        </div>
+    </div>
+
+</body>
+</html>

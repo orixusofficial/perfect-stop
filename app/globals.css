@@ -14,10 +14,19 @@
   --color-mint-deep: #10b981;
   --color-candy: #fb7185;
   --color-candy-deep: #e11d48;
+
+  /* Polished arcade palette — distinctive but not childish. */
+  --color-ps-playful-bg: #ece6ff;
+  --color-ps-playful-accent: #7c3aed;
+  --color-ps-orange-bg: #ffe3cc;
+  --color-ps-orange-accent: #ea580c;
+  --color-ps-red-bg: #7f1d1d;
+  --color-ps-red-accent: #f87171;
 }
 
 @theme inline {
   --font-sans: var(--font-fredoka), ui-rounded, "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-fredoka), ui-rounded, "Segoe UI", system-ui, sans-serif;
 }
 
 /* ------------------------------ dynamic themes ------------------------------ *
@@ -28,110 +37,134 @@
 :root,
 [data-theme="playful"] {
   --ps-bg: #ece6ff;
-  --ps-blob-a: rgba(167, 139, 250, 0.6);
-  --ps-blob-b: rgba(56, 189, 248, 0.4);
-  --ps-blob-c: rgba(253, 224, 71, 0.5);
+  --ps-blob-a: rgba(167, 139, 250, 0.5);
+  --ps-blob-b: rgba(56, 189, 248, 0.35);
+  --ps-blob-c: rgba(253, 224, 71, 0.45);
   --ps-vignette: transparent;
-  --ps-ink: #2e1065;
-  --ps-ink-soft: rgba(46, 16, 101, 0.75);
-  --ps-ink-faint: rgba(46, 16, 101, 0.55);
+  --ps-ink: #2d1063;
+  --ps-ink-soft: rgba(45, 16, 99, 0.7);
+  --ps-ink-faint: rgba(45, 16, 99, 0.5);
   --ps-accent: #7c3aed;
   --ps-card-accent: #7c3aed;
   --ps-accent-deep: #5b21b6;
-  --ps-accent-soft: rgba(124, 58, 237, 0.15);
-  --ps-accent-glow: rgba(124, 58, 237, 0.9);
+  --ps-accent-soft: rgba(124, 58, 237, 0.12);
+  --ps-accent-glow: rgba(124, 58, 237, 0.8);
   --ps-focus: #38bdf8;
   --ps-highlight: #fde047;
   --ps-highlight-deep: #eab308;
-  --ps-highlight-glow: rgba(253, 224, 71, 0.95);
-  --ps-card: rgba(255, 255, 255, 0.75);
-  --ps-card-border: rgba(255, 255, 255, 0.85);
-  --ps-card-hard: rgba(46, 16, 101, 0.14);
-  --ps-card-shadow: rgba(46, 16, 101, 0.55);
-  --ps-card-ink: #2e1065;
-  --ps-card-soft: rgba(46, 16, 101, 0.7);
-  --ps-card-faint: rgba(46, 16, 101, 0.45);
-  --ps-chip-bg: rgba(255, 255, 255, 0.85);
-  --ps-chip-border: rgba(46, 16, 101, 0.1);
-  --ps-chip-shadow: rgba(46, 16, 101, 0.12);
-  --ps-overlay: rgba(236, 230, 255, 0.88);
-  --ps-overlay-strong: rgba(217, 207, 255, 0.94);
+  --ps-highlight-glow: rgba(253, 224, 71, 0.9);
+  --ps-card: rgba(255, 255, 255, 0.78);
+  --ps-card-border: rgba(255, 255, 255, 0.9);
+  --ps-card-hard: rgba(45, 16, 99, 0.16);
+  --ps-card-shadow: rgba(45, 16, 99, 0.5);
+  --ps-card-ink: #2d1063;
+  --ps-card-soft: rgba(45, 16, 99, 0.68);
+  --ps-card-faint: rgba(45, 16, 99, 0.45);
+  --ps-chip-bg: rgba(255, 255, 255, 0.88);
+  --ps-chip-border: rgba(45, 16, 99, 0.1);
+  --ps-chip-shadow: rgba(45, 16, 99, 0.14);
+  --ps-overlay: rgba(236, 230, 255, 0.9);
+  --ps-overlay-strong: rgba(217, 207, 255, 0.96);
   --ps-track-bg: #ffffff;
-  --ps-track-border: rgba(46, 16, 101, 0.1);
-  --ps-stripe: rgba(46, 16, 101, 0.07);
+  --ps-track-border: rgba(45, 16, 99, 0.12);
+  --ps-stripe: rgba(45, 16, 99, 0.06);
   --ps-ghost-shadow: #c4b5fd;
+
+  /* Hit-feedback colors (playful). */
+  --ps-fb-perfect: #fde047;
+  --ps-fb-perfect-deep: #eab308;
+  --ps-fb-great: #6ee7b7;
+  --ps-fb-good: #38bdf8;
+  --ps-fb-miss: #fb7185;
+  --ps-fb-miss-deep: #e11d48;
 }
 
 [data-theme="orange"] {
   --ps-bg: #ffe3cc;
-  --ps-blob-a: rgba(251, 146, 60, 0.55);
-  --ps-blob-b: rgba(253, 230, 138, 0.55);
-  --ps-blob-c: rgba(234, 88, 12, 0.32);
-  --ps-vignette: rgba(154, 52, 18, 0.32);
+  --ps-blob-a: rgba(251, 146, 60, 0.5);
+  --ps-blob-b: rgba(253, 230, 138, 0.5);
+  --ps-blob-c: rgba(234, 88, 12, 0.3);
+  --ps-vignette: rgba(154, 52, 18, 0.35);
   --ps-ink: #431407;
-  --ps-ink-soft: rgba(67, 20, 7, 0.78);
-  --ps-ink-faint: rgba(67, 20, 7, 0.58);
+  --ps-ink-soft: rgba(67, 20, 7, 0.75);
+  --ps-ink-faint: rgba(67, 20, 7, 0.55);
   --ps-accent: #ea580c;
   --ps-card-accent: #ea580c;
   --ps-accent-deep: #9a3412;
-  --ps-accent-soft: rgba(234, 88, 12, 0.15);
-  --ps-accent-glow: rgba(234, 88, 12, 0.85);
+  --ps-accent-soft: rgba(234, 88, 12, 0.12);
+  --ps-accent-glow: rgba(234, 88, 12, 0.8);
   --ps-focus: #9a3412;
   --ps-highlight: #fb923c;
   --ps-highlight-deep: #c2410c;
-  --ps-highlight-glow: rgba(251, 146, 60, 0.95);
-  --ps-card: rgba(255, 251, 245, 0.82);
-  --ps-card-border: rgba(255, 255, 255, 0.88);
-  --ps-card-hard: rgba(124, 45, 18, 0.2);
-  --ps-card-shadow: rgba(124, 45, 18, 0.5);
+  --ps-highlight-glow: rgba(251, 146, 60, 0.9);
+  --ps-card: rgba(255, 251, 245, 0.85);
+  --ps-card-border: rgba(255, 255, 255, 0.9);
+  --ps-card-hard: rgba(124, 45, 18, 0.24);
+  --ps-card-shadow: rgba(124, 45, 18, 0.55);
   --ps-card-ink: #431407;
-  --ps-card-soft: rgba(67, 20, 7, 0.72);
-  --ps-card-faint: rgba(67, 20, 7, 0.48);
-  --ps-chip-bg: rgba(255, 250, 245, 0.9);
+  --ps-card-soft: rgba(67, 20, 7, 0.7);
+  --ps-card-faint: rgba(67, 20, 7, 0.45);
+  --ps-chip-bg: rgba(255, 250, 245, 0.92);
   --ps-chip-border: rgba(124, 45, 18, 0.14);
-  --ps-chip-shadow: rgba(124, 45, 18, 0.16);
-  --ps-overlay: rgba(255, 237, 213, 0.92);
-  --ps-overlay-strong: rgba(254, 215, 170, 0.95);
+  --ps-chip-shadow: rgba(124, 45, 18, 0.18);
+  --ps-overlay: rgba(255, 237, 213, 0.94);
+  --ps-overlay-strong: rgba(254, 215, 170, 0.96);
   --ps-track-bg: #fffaf5;
-  --ps-track-border: rgba(124, 45, 18, 0.14);
-  --ps-stripe: rgba(124, 45, 18, 0.08);
+  --ps-track-border: rgba(124, 45, 18, 0.16);
+  --ps-stripe: rgba(124, 45, 18, 0.07);
   --ps-ghost-shadow: #fdba74;
+
+  /* Hit-feedback colors (orange). */
+  --ps-fb-perfect: #fb923c;
+  --ps-fb-perfect-deep: #c2410c;
+  --ps-fb-great: #fdba74;
+  --ps-fb-good: #fcd34d;
+  --ps-fb-miss: #f97316;
+  --ps-fb-miss-deep: #c2410c;
 }
 
 [data-theme="red"] {
   --ps-bg: #7f1d1d;
   --ps-blob-a: rgba(248, 113, 113, 0.4);
-  --ps-blob-b: rgba(251, 146, 60, 0.38);
-  --ps-blob-c: rgba(255, 241, 242, 0.14);
-  --ps-vignette: rgba(69, 10, 10, 0.62);
+  --ps-blob-b: rgba(251, 146, 60, 0.35);
+  --ps-blob-c: rgba(255, 241, 242, 0.12);
+  --ps-vignette: rgba(69, 10, 10, 0.65);
   --ps-ink: #fff1f2;
-  --ps-ink-soft: rgba(255, 241, 242, 0.82);
-  --ps-ink-faint: rgba(255, 241, 242, 0.62);
+  --ps-ink-soft: rgba(255, 241, 242, 0.8);
+  --ps-ink-faint: rgba(255, 241, 242, 0.6);
   --ps-accent: #f87171;
   --ps-card-accent: #e11d48;
   --ps-accent-deep: #9f1239;
-  --ps-accent-soft: rgba(225, 29, 72, 0.14);
-  --ps-accent-glow: rgba(225, 29, 72, 0.85);
+  --ps-accent-soft: rgba(225, 29, 72, 0.12);
+  --ps-accent-glow: rgba(225, 29, 72, 0.8);
   --ps-focus: #fde047;
   --ps-highlight: #fb923c;
   --ps-highlight-deep: #c2410c;
-  --ps-highlight-glow: rgba(251, 146, 60, 0.95);
-  --ps-card: rgba(255, 241, 242, 0.88);
-  --ps-card-border: rgba(255, 255, 255, 0.9);
-  --ps-card-hard: rgba(69, 10, 10, 0.4);
-  --ps-card-shadow: rgba(69, 10, 10, 0.7);
+  --ps-highlight-glow: rgba(251, 146, 60, 0.9);
+  --ps-card: rgba(255, 241, 242, 0.9);
+  --ps-card-border: rgba(255, 255, 255, 0.92);
+  --ps-card-hard: rgba(69, 10, 10, 0.45);
+  --ps-card-shadow: rgba(69, 10, 10, 0.75);
   --ps-card-ink: #4c0519;
-  --ps-card-soft: rgba(76, 5, 25, 0.72);
-  --ps-card-faint: rgba(76, 5, 25, 0.5);
-  --ps-chip-bg: rgba(255, 247, 247, 0.92);
-  --ps-chip-border: rgba(69, 10, 10, 0.16);
-  --ps-chip-shadow: rgba(69, 10, 10, 0.22);
-  --ps-overlay: rgba(255, 241, 242, 0.94);
-  --ps-overlay-strong: rgba(254, 205, 211, 0.96);
+  --ps-card-soft: rgba(76, 5, 25, 0.7);
+  --ps-card-faint: rgba(76, 5, 25, 0.48);
+  --ps-chip-bg: rgba(255, 247, 247, 0.94);
+  --ps-chip-border: rgba(69, 10, 10, 0.18);
+  --ps-chip-shadow: rgba(69, 10, 10, 0.24);
+  --ps-overlay: rgba(255, 241, 242, 0.95);
+  --ps-overlay-strong: rgba(254, 205, 211, 0.97);
   --ps-track-bg: #fff7f7;
-  --ps-track-border: rgba(69, 10, 10, 0.18);
-  --ps-stripe: rgba(69, 10, 10, 0.09);
+  --ps-track-border: rgba(69, 10, 10, 0.2);
+  --ps-stripe: rgba(69, 10, 10, 0.08);
   --ps-ghost-shadow: #fda4af;
+
+  /* Hit-feedback colors (red). */
+  --ps-fb-perfect: #fde047;
+  --ps-fb-perfect-deep: #eab308;
+  --ps-fb-great: #fda4af;
+  --ps-fb-good: #fdba74;
+  --ps-fb-miss: #f87171;
+  --ps-fb-miss-deep: #9f1239;
 }
 
 @layer base {
@@ -140,38 +173,93 @@
   }
 
   /* Theme crossfade: any element that colours itself picks up the new vars.
-   * Component-level Tailwind transitions (transition-all etc.) still win. */
+   * Shorter duration keeps low-end devices snappy; still feels cohesive. */
   body,
   body * {
     transition:
-      background-color 700ms ease,
-      color 700ms ease,
-      border-color 700ms ease,
-      box-shadow 700ms ease;
+      background-color 450ms ease,
+      color 450ms ease,
+      border-color 450ms ease,
+      box-shadow 450ms ease;
   }
 }
 
 body {
-  font-family: var(--font-fredoka), ui-rounded, "Segoe UI", system-ui, sans-serif;
+  font-family: var(--font-display), ui-rounded, "Segoe UI", system-ui, sans-serif;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+  overflow-x: hidden;
+}
+
+/* Cohesive background environments. Animated soft blobs sit behind the game
+ * card and crossfade with the theme. Each theme keeps its own palette so the
+ * environment reads as a single evolving world, not disconnected screens. */
+.ps-bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0.85;
+  animation: ps-float 10s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.ps-bg-blob.a {
+  top: -12%;
+  left: -8%;
+  width: 260px;
+  height: 260px;
+  background-color: var(--ps-blob-a);
+  animation-delay: 0s;
+}
+.ps-bg-blob.b {
+  top: 30%;
+  right: -10%;
+  width: 320px;
+  height: 320px;
+  background-color: var(--ps-blob-b);
+  animation-delay: 1.8s;
+}
+.ps-bg-blob.c {
+  bottom: -14%;
+  left: 20%;
+  width: 220px;
+  height: 220px;
+  background-color: var(--ps-blob-c);
+  animation-delay: 3.4s;
+}
+
+html[data-theme="red"] .ps-bg-blob {
+  filter: blur(56px);
+  opacity: 0.7;
+}
+
+.ps-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    var(--ps-vignette) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+html[data-theme="orange"] .ps-vignette {
+  opacity: 1;
+  animation: ps-danger 4.5s ease-in-out infinite;
+}
+
+html[data-theme="red"] .ps-vignette {
+  opacity: 1;
+  animation: ps-danger 2.6s ease-in-out infinite;
 }
 
 :focus-visible {
   outline: 3px solid var(--ps-focus, #38bdf8);
   outline-offset: 3px;
-}
-
-/* ---------------------------------- keyframes --------------------------------- */
-
-@keyframes ps-float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-22px) rotate(8deg);
-  }
 }
 
 @keyframes ps-pop {
@@ -316,6 +404,69 @@ body {
   }
 }
 
+/* Hit-feedback animations — satisfying but not juvenile. */
+
+@keyframes ps-fb-perfect {
+  0% {
+    transform: scale(0.9) translateY(0);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.18) translateY(-6px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes ps-fb-great {
+  0% {
+    transform: scale(0.9) translateY(0);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.12) translateY(-4px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(-16px);
+    opacity: 0;
+  }
+}
+
+@keyframes ps-fb-good {
+  0% {
+    transform: scale(0.9) translateY(0);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.08) translateY(-2px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(-12px);
+    opacity: 0;
+  }
+}
+
+@keyframes ps-fb-miss {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(-10px);
+    opacity: 0.85;
+  }
+  75% {
+    transform: translateX(10px);
+    opacity: 0.85;
+  }
+}
+
 /* -------------------------------- utilities ---------------------------------- */
 
 .animate-ps-float {
@@ -358,33 +509,28 @@ body {
   animation: ps-flash 0.9s ease-out both;
 }
 
+.animate-ps-fb-perfect {
+  animation: ps-fb-perfect 0.9s ease-out both;
+}
+
+.animate-ps-fb-great {
+  animation: ps-fb-great 0.8s ease-out both;
+}
+
+.animate-ps-fb-good {
+  animation: ps-fb-good 0.7s ease-out both;
+}
+
+.animate-ps-fb-miss {
+  animation: ps-fb-miss 0.5s ease-in-out both;
+}
+
 .ps-track-stripes {
   background-image: repeating-linear-gradient(
     90deg,
     var(--ps-stripe) 0 3px,
     transparent 3px 26px
   );
-}
-
-/* Warm edge glow while an emergency theme is active. */
-.ps-vignette {
-  background: radial-gradient(
-    ellipse at center,
-    transparent 52%,
-    var(--ps-vignette) 100%
-  );
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-
-html[data-theme="orange"] .ps-vignette {
-  opacity: 1;
-  animation: ps-danger 4.5s ease-in-out infinite;
-}
-
-html[data-theme="red"] .ps-vignette {
-  opacity: 1;
-  animation: ps-danger 2.6s ease-in-out infinite;
 }
 
 /* --------------------------------- buttons ----------------------------------- */
@@ -399,7 +545,7 @@ html[data-theme="red"] .ps-vignette {
   box-shadow: 0 6px 0 var(--ps-accent-deep);
 }
 .ps-btn-primary:hover {
-  filter: brightness(1.07);
+  filter: brightness(1.08);
   transform: translateY(-2px);
   box-shadow: 0 8px 0 var(--ps-accent-deep);
 }
@@ -409,16 +555,18 @@ html[data-theme="red"] .ps-vignette {
 }
 
 .ps-btn-mint {
-  @apply bg-mint-deep text-white shadow-[0_6px_0_#047857];
+  background-color: var(--ps-card-accent);
+  color: #fff;
+  box-shadow: 0 6px 0 var(--ps-accent-deep);
 }
 .ps-btn-mint:hover {
-  filter: brightness(1.07);
+  filter: brightness(1.08);
   transform: translateY(-2px);
-  box-shadow: 0 8px 0 #047857;
+  box-shadow: 0 8px 0 var(--ps-accent-deep);
 }
 .ps-btn-mint:active {
   transform: translateY(4px);
-  box-shadow: 0 2px 0 #047857;
+  box-shadow: 0 2px 0 var(--ps-accent-deep);
 }
 
 .ps-btn-sun {
@@ -427,7 +575,7 @@ html[data-theme="red"] .ps-vignette {
   box-shadow: 0 6px 0 var(--ps-highlight-deep);
 }
 .ps-btn-sun:hover {
-  filter: brightness(1.04);
+  filter: brightness(1.05);
   transform: translateY(-2px);
   box-shadow: 0 8px 0 var(--ps-highlight-deep);
 }
@@ -437,7 +585,7 @@ html[data-theme="red"] .ps-vignette {
 }
 
 .ps-btn-ghost {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.75);
   color: var(--ps-card-ink);
   box-shadow: 0 5px 0 var(--ps-ghost-shadow);
   backdrop-filter: blur(8px);
@@ -449,6 +597,23 @@ html[data-theme="red"] .ps-vignette {
 .ps-btn-ghost:active {
   transform: translateY(3px);
   box-shadow: 0 2px 0 var(--ps-ghost-shadow);
+}
+
+.ps-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border-radius: 26px;
+  border: 2px solid var(--ps-card-border);
+  background-color: var(--ps-overlay-strong);
+  padding: 1.5rem;
+  text-align: center;
+  backdrop-filter: blur(12px);
 }
 
 .ps-chip {
@@ -477,6 +642,20 @@ html[data-theme="red"] .ps-vignette {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  /* Suppress hit-feedback and background motion too. */
+  .animate-ps-fb-perfect,
+  .animate-ps-fb-great,
+  .animate-ps-fb-good,
+  .animate-ps-fb-miss {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .ps-bg-blob {
+    animation: none !important;
+    filter: blur(24px) !important;
   }
 }
 
@@ -516,5 +695,160 @@ html[data-theme="red"] .ps-vignette {
     min-height: 44px;
     padding: 0.75rem !important;
     font-size: 0.875rem !important;
+  }
+}
+
+/* ------------------------------- skins panel ------------------------------- */
+
+.ps-panel-skins {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background-color: var(--ps-overlay-strong);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+.ps-skins-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.ps-skins-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  border-radius: 9999px;
+  border: 2px solid var(--ps-chip-border);
+  background-color: rgba(255, 255, 255, 0.85);
+  color: var(--ps-card-ink);
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 3px 0 var(--ps-ghost-shadow);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.ps-skins-back:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--ps-ghost-shadow);
+}
+
+.ps-skins-back:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--ps-ghost-shadow);
+}
+
+.ps-skins-heading {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ps-card-ink);
+}
+
+.ps-skins-body {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+}
+
+.ps-skins-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 580px;
+}
+
+.ps-skins-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.375rem;
+  border-radius: 1rem;
+  border: 2px solid var(--ps-chip-border);
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 3px 0 var(--ps-chip-shadow);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  min-height: 80px;
+  box-sizing: border-box;
+}
+
+.ps-skins-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(124, 58, 237, 0.45);
+  box-shadow: 0 5px 0 var(--ps-chip-shadow);
+}
+
+.ps-skins-card:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--ps-chip-shadow);
+}
+
+.ps-skins-card.is-active {
+  border-color: var(--ps-accent);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.18) 0%, rgba(168, 85, 247, 0.12) 100%), #ffffff;
+  box-shadow: 0 0 16px var(--ps-accent-glow), 0 3px 0 var(--ps-accent);
+}
+
+.ps-skins-card.is-active:hover {
+  box-shadow: 0 0 20px var(--ps-accent-glow), 0 5px 0 var(--ps-accent);
+}
+
+.ps-skins-card.is-active:active {
+  box-shadow: 0 0 12px var(--ps-accent-glow), 0 1px 0 var(--ps-accent);
+}
+
+.ps-skins-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.ps-skins-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ps-card-ink);
+  letter-spacing: 0.02em;
+}
+
+.ps-skins-card.is-active .ps-skins-label {
+  color: var(--ps-card-accent);
+}
+
+@media (max-width: 639px) {
+  .ps-panel-skins {
+    padding: 1rem;
+  }
+  .ps-skins-grid {
+    gap: 0.5rem;
+  }
+  .ps-skins-card {
+    padding: 0.375rem 0.25rem;
+    min-height: 72px;
+    border-radius: 0.75rem;
+  }
+  .ps-skins-label {
+    font-size: 0.6875rem;
   }
 }

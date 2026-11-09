@@ -1,0 +1,27 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]: 🎯 Reflex Arcade
+  - main [ref=e6]:
+    - heading "Perfect Stop" [level=1] [ref=e8]
+    - region "Perfect Stop game" [ref=e9]:
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - generic [ref=e14]: Score
+            - generic [ref=e15]: "0"
+          - generic [ref=e16]:
+            - generic [ref=e17]:
+              - generic [ref=e18]: Best
+              - generic [ref=e19]: "0"
+            - button "Mute sounds" [ref=e20] [cursor=pointer]
+        - generic [ref=e25]:
+          - generic [ref=e28] [cursor=pointer]
+          - generic [ref=e36]:
+            - generic [ref=e37]: Reflex arcade
+            - heading "Stop inside the zone" [level=2] [ref=e38]
+            - list [ref=e39]:
+              - listitem [ref=e40]: Watch the bounce
+              - listitem [ref=e42]: Stop in the zone
+              - listitem [ref=e44]: Faster every round
+            - button "Play" [active] [ref=e46]
+            - paragraph [ref=e49]: One miss ends the run — beat your best!

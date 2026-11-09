@@ -1,0 +1,83 @@
+<svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Crystal Shading Gradients -->
+    <linearGradient id="crystalTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#d1d5db" />
+      <stop offset="100%" stop-color="#6b7280" />
+    </linearGradient>
+
+    <linearGradient id="stoneMid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9ca3af" />
+      <stop offset="50%" stop-color="#4b5563" />
+      <stop offset="100%" stop-color="#1f2937" />
+    </linearGradient>
+
+    <linearGradient id="crystalCluster" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e5e7eb" />
+      <stop offset="40%" stop-color="#9ca3af" />
+      <stop offset="100%" stop-color="#374151" />
+    </linearGradient>
+
+    <linearGradient id="crystalBottom" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a" />
+      <stop offset="50%" stop-color="#d97706" />
+      <stop offset="100%" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Stacked Crystalline & Stone Stack (Fitted precisely inside 120x120 height) -->
+  <g filter="url(#shadow)" stroke="#111827" stroke-width="1.2" stroke-linejoin="round">
+    
+    <!-- 1. Top Crystal Point -->
+    <g transform="translate(60, 14)">
+      <polygon points="0,-12 9,-4 9,8 0,14 -9,8 -9,-4" fill="url(#crystalTop)" />
+      <polyline points="0,-12 0,14" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.8" />
+      <polyline points="-9,-4 0,0 9,-4" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.6" />
+    </g>
+
+    <!-- 2. Smooth Rounded Agate Stone -->
+    <g transform="translate(60, 35)">
+      <path d="M -15,-6 C -18,-11 -6,-13 0,-13 C 6,-13 18,-11 15,-6 C 13,0 15,7 10,9 C 3,11 -3,11 -10,9 C -15,7 -13,0 -15,-6 Z" fill="url(#stoneMid)" />
+      <!-- Agate Swirl Lines -->
+      <path d="M -9,-4 C -4,-8 4,-8 9,-4" fill="none" stroke="#d1d5db" stroke-width="1" opacity="0.7" />
+      <path d="M -11,2 C -5,-2 5,-2 11,2" fill="none" stroke="#d1d5db" stroke-width="1" opacity="0.6" />
+    </g>
+
+    <!-- 3. Center Crystal Cluster (Large prominent centerpiece) -->
+    <g transform="translate(60, 63)">
+      <!-- Surrounding smaller crystal shards -->
+      <polygon points="-16,-6 -24,-10 -18,-2" fill="url(#crystalCluster)" />
+      <polygon points="16,-6 24,-10 18,-2" fill="url(#crystalCluster)" />
+      <polygon points="-18,2 -26,6 -16,4" fill="url(#crystalCluster)" />
+      <polygon points="18,2 26,6 16,4" fill="url(#crystalCluster)" />
+      <polygon points="-10,12 -20,16 -12,8" fill="url(#crystalCluster)" />
+      <polygon points="10,12 20,16 12,8" fill="url(#crystalCluster)" />
+      <polygon points="0,16 -8,22 8,22" fill="url(#crystalCluster)" />
+
+      <!-- Main Center Vertical Crystal -->
+      <polygon points="0,-18 11,-8 11,10 0,18 -11,10 -11,-8" fill="url(#crystalCluster)" />
+      <polyline points="0,-18 0,18" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.9" />
+      <polyline points="-11,-8 0,-2 11,-8" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.7" />
+    </g>
+
+    <!-- 4. Angular Faceted Stone -->
+    <g transform="translate(60, 93)">
+      <polygon points="0,-10 14,-6 12,6 0,10 -12,6 -14,-6" fill="url(#stoneMid)" />
+      <polyline points="-14,-6 0,-2 14,-6" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.7" />
+      <polyline points="0,-2 0,10" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.6" />
+    </g>
+
+    <!-- 5. Bottom Amber Crystal -->
+    <g transform="translate(60, 110)">
+      <polygon points="0,-8 8,-3 8,6 0,10 -8,6 -8,-3" fill="url(#crystalBottom)" />
+      <polyline points="0,-8 0,10" fill="none" stroke="#fef3c7" stroke-width="0.8" opacity="0.8" />
+    </g>
+
+  </g>
+</svg>

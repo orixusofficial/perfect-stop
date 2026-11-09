@@ -1,0 +1,30 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]: reflex arcade
+    - generic [ref=e6]: tap · click · space to stop
+  - main [ref=e7]:
+    - generic [ref=e8]:
+      - heading "Perfect Stop" [level=1] [ref=e9]
+      - paragraph [ref=e10]: Stop the moving indicator inside the zone. Every round gets faster — one miss ends the run.
+    - region "Perfect Stop game" [ref=e11]:
+      - generic [ref=e14]:
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - generic [ref=e17]: Score
+            - generic [ref=e18]: "0"
+          - generic [ref=e19]:
+            - generic [ref=e20]:
+              - generic [ref=e21]: Best
+              - generic [ref=e22]: "0"
+            - button "Mute sounds" [ref=e23] [cursor=pointer]
+        - generic [ref=e28]:
+          - generic [ref=e31] [cursor=pointer]
+          - generic [ref=e41]:
+            - generic [ref=e42]: Reflex arcade
+            - heading "Stop inside the zone" [level=2] [ref=e43]
+            - list [ref=e44]:
+              - listitem [ref=e45]: Watch the bounce
+              - listitem [ref=e47]: Stop in the zone
+              - listitem [ref=e49]: Faster every round
+            - button "Play" [active] [ref=e51]
+            - paragraph [ref=e54]: One miss ends the run — beat your best!

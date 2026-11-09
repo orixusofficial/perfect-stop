@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candy Twist Slider - 120x120</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            height: 120px;
+            overflow: hidden;
+        }
+        svg {
+            width: 120px;
+            height: 120px;
+            filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.25));
+        }
+    </style>
+</head>
+<body>
+
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Candy Stick Shading Gradient -->
+    <linearGradient id="candyShadow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b0a5e" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#2a0545" stop-opacity="0.8"/>
+    </linearGradient>
+
+    <!-- Purple Stripe Gradient -->
+    <linearGradient id="purpleStripe" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9d35e0"/>
+      <stop offset="50%" stop-color="#7a1cb8"/>
+      <stop offset="100%" stop-color="#540a8a"/>
+    </linearGradient>
+
+    <!-- White Stripe Gradient -->
+    <linearGradient id="whiteStripe" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f0e6fc"/>
+      <stop offset="100%" stop-color="#d1bcee"/>
+    </linearGradient>
+
+    <!-- Lollipop Sphere Shading -->
+    <radialGradient id="lollipopGleam" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#fffde6"/>
+      <stop offset="25%" stop-color="#ffea75"/>
+      <stop offset="65%" stop-color="#f5b800"/>
+      <stop offset="100%" stop-color="#b87800"/>
+    </radialGradient>
+
+    <!-- Lollipop Ridge Shading -->
+    <linearGradient id="ridgeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffe66d"/>
+      <stop offset="50%" stop-color="#f5b800"/>
+      <stop offset="100%" stop-color="#9e6600"/>
+    </linearGradient>
+
+    <!-- Drop Shadow Filter for Depth -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Slim Twisted Candy Stick Track -->
+  <g filter="url(#shadow)">
+    <!-- Base stick background pill -->
+    <rect x="52" y="8" width="16" height="104" rx="8" fill="#4d107a" stroke="#320852" stroke-width="1.5"/>
+
+    <!-- Twisted Stripe Segments simulating 3D candy twist -->
+    <g clip-path="url(#stickClip)">
+      <clipPath id="stickClip">
+        <rect x="53.5" y="9" width="13" height="102" rx="6.5"/>
+      </clipPath>
+      
+      <!-- Repeat diagonal twisted bands -->
+      <path d="M 50,2 L 70,16 L 70,24 L 50,10 Z" fill="url(#purpleStripe)"/>
+      <path d="M 50,10 L 70,24 L 70,32 L 50,18 Z" fill="url(#whiteStripe)"/>
+      <path d="M 50,18 L 70,32 L 70,40 L 50,26 Z" fill="url(#purpleStripe)"/>
+      <path d="M 50,26 L 70,40 L 70,48 L 50,34 Z" fill="url(#whiteStripe)"/>
+      <path d="M 50,34 L 70,48 L 70,56 L 50,42 Z" fill="url(#purpleStripe)"/>
+      <path d="M 50,42 L 70,56 L 70,64 L 50,50 Z" fill="url(#whiteStripe)"/>
+      <path d="M 50,50 L 70,64 L 70,72 L 50,58 Z" fill="url(#purpleStripe)"/>
+      <path d="M 50,58 L 70,72 L 70,80 L 50,66 Z" fill="url(#whiteStripe)"/>
+      <path d="M 50,66 L 70,80 L 70,88 L 50,74 Z" fill="url(#purpleStripe)"/>
+      <path d="M 50,74 L 70,88 L 70,96 L 50,82 Z" fill="url(#whiteStripe)"/>
+      <path d="M 50,82 L 70,96 L 70,104 L 50,90 Z" fill="url(#purpleStripe)"/>
+      <path d="M 50,90 L 70,104 L 70,112 L 50,98 Z" fill="url(#whiteStripe)"/>
+      <path d="M 50,98 L 70,112 L 70,120 L 50,106 Z" fill="url(#purpleStripe)"/>
+    </g>
+
+    <!-- Stick 3D Edge Highlight & Shadow Overlay -->
+    <rect x="53.5" y="9" width="13" height="102" rx="6.5" fill="url(#candyShadow)" style="mix-blend-mode: overlay;"/>
+  </g>
+
+  <!-- Center Golden Lollipop Knob -->
+  <g transform="translate(60, 60)" filter="url(#shadow)">
+    <!-- Outer Rim / Drop Shadow of Knob -->
+    <circle cx="0" cy="0" r="23" fill="#9e6600"/>
+
+    <!-- Main Sphere Body -->
+    <circle cx="0" cy="0" r="21.5" fill="url(#lollipopGleam)" stroke="#a16900" stroke-width="1.5"/>
+
+    <!-- Center Raised Ridge / Seam Band -->
+    <ellipse cx="0" cy="0" rx="22" ry="7" fill="url(#ridgeGrad)" stroke="#875400" stroke-width="1"/>
+
+    <!-- Top Hemisphere Gloss Highlight -->
+    <path d="M -10,-13 C -5,-18 5,-18 10,-13 C 6,-15 -6,-15 -10,-13 Z" fill="#ffffff" opacity="0.85"/>
+    <ellipse cx="-6" cy="-11" rx="4" ry="2" fill="#ffffff" opacity="0.9" transform="rotate(-30 -6 -11)"/>
+  </g>
+
+</svg>
+</body>
+</html>

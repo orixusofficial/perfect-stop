@@ -1,0 +1,18 @@
+
+> perfect_stop@0.1.0 dev
+> next dev
+
+▲ Next.js 16.4.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.4:3000
+✓ Ready in 1141ms
+✓ Running next.config.ts took 74ms
+- Experiments (use with caution):
+  ✓ agentFeedback
+
+ GET / 200 in 625ms (next.js: 251ms, application-code: 374ms)
+ GET / 200 in 255ms (next.js: 10ms, application-code: 244ms)
+✓ Compiled in 837ms
+✓ Compiled in 217ms
+ GET / 200 in 512ms (next.js: 47ms, application-code: 465ms)
+✓ Compiled in 546ms

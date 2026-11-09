@@ -1,12 +1,12 @@
 import type { NextConfig } from "next";
 
+const isExport = process.env.EXPORT_MODE === 'true'
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  ...(isExport ? { output: "export", assetPrefix: "./" } : {}),
   experimental: {
     agentFeedback: true,
   },
-  cacheComponents: true,
-  partialPrefetching: true,
   turbopack: {
     rules: {
       "*.css": {

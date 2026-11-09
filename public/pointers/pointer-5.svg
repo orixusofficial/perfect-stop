@@ -1,0 +1,112 @@
+<svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Slim fuzzy charcoal stem track -->
+    <linearGradient id="charcoalStem" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2a2a2a" />
+      <stop offset="50%" stop-color="#4a4a4a" />
+      <stop offset="100%" stop-color="#1c1c1c" />
+    </linearGradient>
+
+    <!-- Orange Planet Gradient -->
+    <radialGradient id="planetOrange" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffdfa9" />
+      <stop offset="40%" stop-color="#e8833a" />
+      <stop offset="85%" stop-color="#b84514" />
+      <stop offset="100%" stop-color="#7a2405" />
+    </radialGradient>
+
+    <!-- Saturn Gold Gradient -->
+    <radialGradient id="planetSaturn" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#fff5cc" />
+      <stop offset="45%" stop-color="#e0b060" />
+      <stop offset="85%" stop-color="#b07825" />
+      <stop offset="100%" stop-color="#784a0a" />
+    </radialGradient>
+
+    <!-- Rocket Body Shading -->
+    <linearGradient id="rocketBody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b0b8c4" />
+      <stop offset="30%" stop-color="#ffffff" />
+      <stop offset="75%" stop-color="#e2e8f0" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+
+    <!-- Rocket Nose & Fins (Red) -->
+    <linearGradient id="rocketRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b6b" />
+      <stop offset="50%" stop-color="#e63946" />
+      <stop offset="100%" stop-color="#9b111e" />
+    </linearGradient>
+
+    <!-- Rocket Window -->
+    <radialGradient id="windowGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#e0f7fa" />
+      <stop offset="50%" stop-color="#00bcd4" />
+      <stop offset="100%" stop-color="#006064" />
+    </radialGradient>
+
+    <!-- Blue Neptune Gradient -->
+    <radialGradient id="planetBlue" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#d0f4ff" />
+      <stop offset="45%" stop-color="#38bdf8" />
+      <stop offset="85%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </radialGradient>
+
+    <!-- Deep Blue Planet -->
+    <radialGradient id="planetDeepBlue" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#93c5fd" />
+      <stop offset="45%" stop-color="#3b82f6" />
+      <stop offset="85%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </radialGradient>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Slim Charcoal Track Line -->
+  <rect x="58" y="10" width="4" height="100" fill="url(#charcoalStem)" rx="2" />
+
+  <!-- Top Planet -->
+  <g transform="translate(60, 18)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="13" fill="url(#planetOrange)" stroke="#611c03" stroke-width="1" />
+    <path d="M -11,-3 C -5,-1 5,-1 11,-3" stroke="#a83a0c" stroke-width="1.5" fill="none" opacity="0.6" />
+    <path d="M -12,3 C -6,5 6,5 12,3" stroke="#a83a0c" stroke-width="1.5" fill="none" opacity="0.6" />
+  </g>
+
+  <!-- Saturn Planet -->
+  <g transform="translate(60, 42)" filter="url(#shadow)">
+    <path d="M -15,4 C -8,1 8,1 15,4" stroke="#c29b48" stroke-width="2" fill="none" opacity="0.7" />
+    <circle cx="0" cy="0" r="10" fill="url(#planetSaturn)" stroke="#593708" stroke-width="1" />
+    <path d="M -15,4 C -8,7 8,7 15,4" stroke="#e0b863" stroke-width="3.5" fill="none" />
+    <path d="M -15,4 C -8,7 8,7 15,4" stroke="#593708" stroke-width="1" fill="none" />
+  </g>
+
+  <!-- Center Rocket Knob -->
+  <g transform="translate(60, 72)" filter="url(#shadow)">
+    <path d="M -5,16 C -3,22 0,26 0,26 C 0,26 3,22 5,16 Z" fill="#ffb703" />
+    <path d="M -2,17 C -1,20 0,23 0,23 C 0,23 1,20 2,17 Z" fill="#ffffff" />
+    <path d="M -10,8 C -16,12 -18,17 -18,17 C -14,14 -10,10 -10,6 Z" fill="url(#rocketRed)" stroke="#7a0d17" stroke-width="0.75" />
+    <path d="M 10,8 C 16,12 18,17 18,17 C 14,14 10,10 10,6 Z" fill="url(#rocketRed)" stroke="#7a0d17" stroke-width="0.75" />
+    <path d="M -9,12 C -9,-6 -4,-18 0,-21 C 4,-18 9,-6 9,12 Z" fill="url(#rocketBody)" stroke="#64748b" stroke-width="1" />
+    <path d="M -6,-15 C -3,-19 0,-21 0,-21 C 0,-21 3,-19 6,-15 C 3,-16 -3,-16 -6,-15 Z" fill="url(#rocketRed)" />
+    <circle cx="0" cy="-3" r="5" fill="url(#windowGrad)" stroke="#475569" stroke-width="1" />
+    <ellipse cx="-1.5" cy="-4.5" rx="1.5" ry="0.8" fill="#ffffff" opacity="0.8" transform="rotate(-30 -1.5 -4.5)" />
+  </g>
+
+  <!-- Cyan Ringed Planet -->
+  <g transform="translate(60, 96)" filter="url(#shadow)">
+    <path d="M -13,2 C -6,0 6,0 13,2" stroke="#7dd3fc" stroke-width="2" fill="none" opacity="0.7" />
+    <circle cx="0" cy="0" r="9" fill="url(#planetBlue)" stroke="#03456e" stroke-width="1" />
+    <path d="M -13,2 C -6,4 6,4 13,2" stroke="#bae6fd" stroke-width="3" fill="none" />
+    <path d="M -13,2 C -6,4 6,4 13,2" stroke="#03456e" stroke-width="0.75" fill="none" />
+  </g>
+
+  <!-- Bottom Blue Planet -->
+  <g transform="translate(60, 113)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="8" fill="url(#planetDeepBlue)" stroke="#112262" stroke-width="1" />
+    <path d="M -7, -1 C -3, 2 3, 2 7, -1" stroke="#93c5fd" stroke-width="1" fill="none" opacity="0.7" />
+  </g>
+</svg>

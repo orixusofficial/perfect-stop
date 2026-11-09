@@ -19,6 +19,8 @@ export type BurstOptions = {
 export type ParticleHandle = {
   /** Confetti burst at a point (coordinates relative to the layer). */
   burst: (x: number, y: number, options?: BurstOptions) => void;
+  /** Verdict-aware burst with tuned colors, count, and power. */
+  burstByKind: (x: number, y: number, kind: string, options?: BurstOptions) => void;
   /** Full-width celebration falling from the top of the layer. */
   celebrate: (colors?: string[]) => void;
 };
@@ -35,10 +37,31 @@ type Particle = {
   maxLife: number;
   gravity: number;
   color: string;
-  round: boolean;
+  shape: "square" | "circle";
+  /** Slight per-particle speed jitter so bursts feel organic. */
+  jitter: number;
 };
 
 const PALETTE = ["#7c3aed", "#38bdf8", "#fde047", "#6ee7b7", "#ffffff"];
+
+/** Verdict-specific palettes so each hit reads distinctly. */
+export const VERDICT_PALETTES: Record<string, string[]> = {
+  perfect: ["#fde047", "#facc15", "#ffffff", "#38bdf8"],
+  great: ["#6ee7b7", "#38bdf8", "#ffffff"],
+  good: ["#38bdf8", "#7c3aed", "#ffffff"],
+  miss: ["#fb7185", "#ffffff", "#d9cfff"],
+};
+
+/** Hard cap so bursts never overwhelm low-end devices. */
+const MAX_PARTICLES = 90;
+
+/** Default bursts per verdict (tuned for feel, not quantity). */
+const DEFAULT_BURST: Record<string, { count: number; power: number; updraft: number }> = {
+  perfect: { count: 36, power: 420, updraft: 0.6 },
+  great: { count: 24, power: 340, updraft: 0.55 },
+  good: { count: 18, power: 280, updraft: 0.5 },
+  miss: { count: 20, power: 260, updraft: 0.4 },
+};
 
 const ParticleLayer = forwardRef<ParticleHandle>(function ParticleLayer(
   _props,
@@ -64,6 +87,7 @@ const ParticleLayer = forwardRef<ParticleHandle>(function ParticleLayer(
       if (canvas && ctx) {
         ctx.clearRect(0, 0, state.width, state.height);
 
+        let alive = 0;
         for (let i = state.particles.length - 1; i >= 0; i--) {
           const p = state.particles[i];
           p.life += dt;
@@ -73,25 +97,32 @@ const ParticleLayer = forwardRef<ParticleHandle>(function ParticleLayer(
           }
 
           p.vy += p.gravity * dt;
-          p.x += p.vx * dt;
+          p.x += p.vx * dt * p.jitter;
           p.y += p.vy * dt;
           p.rot += p.spin * dt;
 
-          const fade = Math.min(1, (p.maxLife - p.life) / 0.35);
+          const fade = Math.min(1, (p.maxLife - p.life) / 0.4);
+          if (fade <= 0) continue;
+          alive += 1;
+
           ctx.save();
           ctx.globalAlpha = fade;
           ctx.translate(p.x, p.y);
           ctx.rotate(p.rot);
           ctx.fillStyle = p.color;
 
-          if (p.round) {
+          if (p.shape === "circle") {
             ctx.beginPath();
             ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
             ctx.fill();
           } else {
-            ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * 0.66);
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
           }
           ctx.restore();
+        }
+
+        if (alive === 0 && state.particles.length === 0) {
+          state.raf = 0;
         }
       }
 
@@ -124,53 +155,76 @@ const ParticleLayer = forwardRef<ParticleHandle>(function ParticleLayer(
       const state = stateRef.current;
       if (state.width === 0 || state.height === 0) return;
 
-      for (let i = 0; i < count; i++) {
+      // Enforce the global cap so low-end devices stay smooth.
+      const room = Math.max(0, MAX_PARTICLES - state.particles.length);
+      const emit = Math.min(count, room);
+      if (emit <= 0) return;
+
+      for (let i = 0; i < emit; i++) {
         const angle =
           -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * (1.15 - updraft * 0.5);
-        const speed = power * (0.35 + Math.random() * 0.75);
+        const speed = power * (0.4 + Math.random() * 0.8);
+        const size = 4 + Math.random() * 6;
         spawn({
           x,
           y,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
-          size: 5 + Math.random() * 7,
+          size,
           rot: Math.random() * Math.PI,
-          spin: (Math.random() - 0.5) * 10,
+          spin: (Math.random() - 0.5) * 12,
           life: 0,
-          maxLife: 0.6 + Math.random() * 0.5,
-          gravity: 900,
+          maxLife: 0.55 + Math.random() * 0.5,
+          gravity: 950,
           color: colors[i % colors.length],
-          round: Math.random() > 0.55,
+          shape: Math.random() > 0.5 ? "square" : "circle",
+          jitter: 0.85 + Math.random() * 0.3,
         });
       }
       ensureLoop();
+    };
+
+    const burstByKind = (
+      x: number,
+      y: number,
+      kind: string,
+      options: BurstOptions = {},
+    ) => {
+      const preset = DEFAULT_BURST[kind] ?? DEFAULT_BURST.good;
+      const colors = options.colors ?? (VERDICT_PALETTES[kind] ?? PALETTE);
+      return burst(x, y, { ...preset, colors, ...options });
     };
 
     const celebrate = (colors: string[] = PALETTE) => {
       const state = stateRef.current;
       if (state.width === 0 || state.height === 0) return;
 
-      const count = Math.min(120, Math.round(state.width / 7));
-      for (let i = 0; i < count; i++) {
+      const count = Math.min(60, Math.round(state.width / 10));
+      const room = Math.max(0, MAX_PARTICLES - state.particles.length);
+      const emit = Math.min(count, room);
+      if (emit <= 0) return;
+
+      for (let i = 0; i < emit; i++) {
         spawn({
           x: Math.random() * state.width,
           y: -20 - Math.random() * 60,
-          vx: (Math.random() - 0.5) * 160,
-          vy: 60 + Math.random() * 180,
-          size: 7 + Math.random() * 8,
+          vx: (Math.random() - 0.5) * 140,
+          vy: 70 + Math.random() * 170,
+          size: 6 + Math.random() * 8,
           rot: Math.random() * Math.PI,
           spin: (Math.random() - 0.5) * 9,
           life: 0,
           maxLife: 2 + Math.random() * 1.2,
           gravity: 220,
           color: colors[i % colors.length],
-          round: Math.random() > 0.6,
+          shape: Math.random() > 0.55 ? "square" : "circle",
+          jitter: 1,
         });
       }
       ensureLoop();
     };
 
-    return { burst, celebrate };
+    return { burst, burstByKind, celebrate };
   });
 
   useEffect(() => {
